@@ -29,16 +29,10 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public'), { index: false }));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// Root route with User-Agent detection
+// Root route: Always serve index.html (it's adaptive)
+// Telegram identification is handled client-side in index.html to redirect to mobile.html if needed.
 app.get('/', (req, res) => {
-    const ua = req.headers['user-agent'] || '';
-    const isMobile = /mobile/i.test(ua) || /android/i.test(ua) || /iphone|ipad|ipod/i.test(ua);
-
-    if (isMobile) {
-        res.sendFile(path.join(__dirname, 'public', 'mobile.html'));
-    } else {
-        res.sendFile(path.join(__dirname, 'public', 'index.html'));
-    }
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 // Database setup
