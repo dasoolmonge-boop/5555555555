@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap');
+
+:root {
+  --primary: #1a1a1a;
+  --secondary: #c9a050; /* Gold for premium feel */
+  --text: #333;
+  --bg: #fff;
+  --bg-soft: #f9f9f9;
+  --transition: all 0.3s ease;
+  --max-width: 1200px;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  color: var(--text);
+  background-color: var(--bg);
+  line-height: 1.6;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: var(--transition);
+}
+
+ul {
+  list-style: none;
+}
+
+h1, h2, h3 {
+  color: var(--primary);
+  line-height: 1.2;
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+section {
+  padding: 5rem 0;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.animate-fade { animation: fadeIn 1s ease forwards; }
+.animate-slide-up { animation: slideUp 0.8s ease-out forwards; }
+.animate-slide-down { animation: slideDown 0.8s ease-out forwards; }
+.animate-scale { animation: scaleIn 0.5s ease forwards; }
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+[data-reveal].active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Calendar Styles */
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+  margin-top: 1rem;
+}
+
+.calendar-day {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  transition: var(--transition);
+}
+
+.calendar-day:hover { background: var(--bg-soft); color: var(--secondary); }
+.calendar-day.selected { background: var(--secondary); color: white; }
+.calendar-day.disabled { color: #ccc; cursor: not-allowed; text-decoration: line-through; }
+.calendar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
